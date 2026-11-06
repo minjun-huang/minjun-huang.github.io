@@ -49,13 +49,13 @@ function projectRow(project) {
   const media = el("div", "project-row__media");
   const image = el("img");
   image.src = project.cover;
-  image.alt = `${project.title} cover`;
+  image.alt = "";
   image.loading = "lazy";
   media.append(image);
 
   row.append(
     media,
-    el("h3", "h3 project-row__title", project.title),
+    el("h2", "h3 project-row__title", project.title),
     el("p", "body project-row__summary", project.summary),
     el("p", "label project-row__meta", [...project.tags, project.year].join(" / "))
   );
@@ -93,10 +93,14 @@ function renderBlock(block, project, sectionIndex) {
   if (block.type === "section") return sectionRule(sectionIndex, block.value, project.year);
   if (block.type === "heading") return el("h2", "h3 case-heading", block.value);
   if (block.type === "text") return el("p", "body", block.value);
-  if (block.type === "caption") return el("p", "label case-caption", block.value);
+  if (block.type === "caption") return el("p", "body case-caption", block.value);
   const image = el("img", "case-image");
   image.src = block.value;
-  image.alt = `${project.title} case study image`;
+  image.alt = block.alt || `${project.title} case study image`;
+  if (block.width && block.height) {
+    image.width = block.width;
+    image.height = block.height;
+  }
   image.loading = "lazy";
   return image;
 }
