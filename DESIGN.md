@@ -41,13 +41,14 @@ the frame and the work stay distinct.
 
 ### Where the accent is allowed
 
-Exactly these five places, and nowhere else:
+Exactly these six places, and nowhere else:
 
 1. The square full stop after the name, and after the email in the footer
 2. The `CV` item in the navigation
 3. The section rule: its top border, its label, and its year
 4. The project row meta line
 5. The underline that appears on link hover
+6. The offset block behind the About photo (the photo itself is black and white, so this is the only colour on that part of the page)
 
 Never on body text, never on headings, never on the hero itself.
 
