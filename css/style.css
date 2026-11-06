@@ -547,3 +547,48 @@ main {
   background: var(--ink);
   border-color: var(--ink);
 }
+
+/* About: intro text with a portrait beside it.
+   The offset accent block behind the photo is the sixth allowed use of the accent. */
+
+.about-intro {
+  display: grid;
+  gap: var(--space-48);
+  margin-top: var(--space-64);
+}
+
+.about-intro > .page-copy {
+  margin-top: 0;
+}
+
+.about-photo {
+  position: relative;
+  margin: 0 var(--space-16) var(--space-16) 0;
+  max-width: 344px;
+}
+
+.about-photo::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-16) calc(var(--space-16) * -1) calc(var(--space-16) * -1) var(--space-16);
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.about-photo img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+@media (min-width: 900px) {
+  .about-intro {
+    grid-template-columns: minmax(0, 58ch) 320px;
+    justify-content: space-between;
+    align-items: start;
+  }
+}
