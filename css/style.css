@@ -646,3 +646,73 @@ main {
     gap: var(--space-96);
   }
 }
+
+/* Town: the home-page device. One line weight, one accent, one tint on hover. */
+
+.town {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .town {
+    display: block;
+    margin-top: var(--space-48);
+    --town-tint: #E9ECFE;
+  }
+}
+
+.town__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 480ms var(--ease-enter), opacity 360ms ease-out;
+}
+
+.town.is-leaving .town__svg {
+  transform: scale(1.5);
+  opacity: 0;
+}
+
+.town__grid path { stroke: var(--line); stroke-width: 1; }
+
+.town__plot { cursor: pointer; outline: none; }
+
+.town__fill { stroke: var(--ink); stroke-width: 1.2; fill: var(--bg); transition: fill 200ms ease-out, stroke 200ms ease-out; }
+.town__plotline { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 5; fill: none; }
+.town__line { stroke: var(--ink); stroke-width: 1.2; transition: stroke 200ms ease-out; }
+.town__dash { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 5; transition: stroke 200ms ease-out; }
+.town__leader { stroke: var(--accent); stroke-width: 1; opacity: .35; transition: opacity 200ms ease-out; }
+.town__dot { fill: var(--accent); transition: transform 200ms ease-out; transform-box: fill-box; transform-origin: center; }
+.town__ring { stroke: var(--accent); stroke-width: 1; opacity: 0; transition: opacity 200ms ease-out; }
+.town__label { font: 500 13px/1 "Archivo", sans-serif; letter-spacing: .08em; text-transform: uppercase; fill: var(--ink); transition: fill 200ms ease-out; }
+.town__blurb { font: 400 13px/1 "Archivo", sans-serif; fill: var(--ink-2); opacity: 0; transition: opacity 200ms ease-out; }
+.town__next { stroke: var(--line); stroke-width: 1; stroke-dasharray: 4 6; }
+.town__next-label { font: 500 11px/1 "Archivo", sans-serif; letter-spacing: .08em; text-transform: uppercase; fill: var(--ink-3); }
+
+.town__plot:hover .town__fill,
+.town__plot:focus-visible .town__fill { fill: var(--town-tint); stroke: var(--accent); }
+.town__plot:hover .town__plotline,
+.town__plot:focus-visible .town__plotline { stroke: var(--accent); stroke-dasharray: none; }
+.town__plot:hover .town__line,
+.town__plot:hover .town__dash,
+.town__plot:focus-visible .town__line,
+.town__plot:focus-visible .town__dash { stroke: var(--accent); }
+.town__plot:hover .town__leader,
+.town__plot:focus-visible .town__leader { opacity: .9; }
+.town__plot:hover .town__ring,
+.town__plot:focus-visible .town__ring { opacity: .4; }
+.town__plot:hover .town__dot,
+.town__plot:focus-visible .town__dot { transform: scale(1.4); }
+.town__plot:hover .town__label,
+.town__plot:focus-visible .town__label { fill: var(--accent); }
+.town__plot:hover .town__blurb,
+.town__plot:focus-visible .town__blurb { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .town__svg, .town__fill, .town__line, .town__dash, .town__leader, .town__dot, .town__ring, .town__label, .town__blurb { transition: none; }
+  .town.is-leaving .town__svg { transform: none; }
+}
