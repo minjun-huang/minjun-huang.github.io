@@ -27,6 +27,25 @@ function el(tag, className, text) {
   return element;
 }
 
+function initTown() {
+  const town = document.querySelector("[data-town]");
+  if (!town) return;
+  const svg = town.querySelector(".town__svg");
+  town.querySelectorAll(".town__plot").forEach((plot) => {
+    plot.addEventListener("click", (event) => {
+      if (reducedMotion || event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+      event.preventDefault();
+      // Zoom toward the plot that was clicked, then go to its case page.
+      const box = svg.viewBox.baseVal;
+      const x = ((plot.dataset.cx - box.x) / box.width) * 100;
+      const y = ((plot.dataset.cy - box.y) / box.height) * 100;
+      svg.style.transformOrigin = `${x}% ${y}%`;
+      town.classList.add("is-leaving");
+      window.setTimeout(() => { window.location.href = plot.getAttribute("href"); }, 420);
+    });
+  });
+}
+
 function initNav() {
   const nav = document.querySelector(".nav");
   if (!nav) return;
@@ -147,6 +166,7 @@ async function renderCase(root) {
 }
 
 initNav();
+initTown();
 document.querySelectorAll("[data-reveal]").forEach(reveal);
 
 const projectList = document.querySelector("[data-project-list]");

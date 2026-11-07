@@ -47,9 +47,9 @@
       if (!a) return;
       const href = a.getAttribute("href") || "";
       const page = location.pathname.split("/").pop() || "index.html";
-      if (a.classList.contains("project-row")) {
-        const slug = new URL(a.href).searchParams.get("slug");
-        send("select_project", { project: slug, from_page: page });
+      if (a.classList.contains("project-row") || a.classList.contains("town__plot")) {
+        const slug = new URL(a.href, location.href).searchParams.get("slug");
+        send("select_project", { project: slug, from_page: page, link_place: a.classList.contains("town__plot") ? "town" : "list" });
       } else if (href.endsWith("cv.pdf")) {
         send("cv_download", { link_place: a.closest(".footer") ? "footer" : a.closest(".nav") ? "nav" : "page", from_page: page });
       } else if (href.startsWith("mailto:")) {
