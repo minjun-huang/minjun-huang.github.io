@@ -28,7 +28,12 @@ window.PROJECTS = [
       { "type": "section", "value": "Key features" },
       { "type": "heading", "value": "Three checks, and you can watch all three happen." },
       { "type": "text", "value": "A photo taken on site, a GPS match, then a manual review before any points land. In the first version the location check ran silently. I split the submit screen into two equal cards, photo and location, so the check nobody knew about became something you could see working. The screen after submitting says pending, not well done, because at that moment the points are not real yet." },
-      { "type": "image", "value": "assets/greener/board-04-features.webp", "alt": "Onboarding, finding a task, sending photo and location proof, rewards and the map", "width": 1500, "height": 4767 },
+      { "type": "image", "value": "assets/greener/feature-01-onboarding.webp", "alt": "Onboarding in four screens: welcome, find a task, do it and send a photo, collect stamps", "width": 1500, "height": 1268 },
+      { "type": "image", "value": "assets/greener/feature-02-home.webp", "alt": "Home with tasks grouped by place, next to the task detail with numbered steps and a route map", "width": 1500, "height": 2064 },
+      { "type": "image", "value": "assets/greener/feature-03-submit.webp", "alt": "Submit proof: the button stays off until a photo is added, then becomes active", "width": 1500, "height": 2064 },
+      { "type": "image", "value": "assets/greener/feature-04-status.webp", "alt": "After submitting: a status screen with the photo and review timeline, next to the progress dashboard", "width": 1500, "height": 2064 },
+      { "type": "image", "value": "assets/greener/feature-05-rewards.webp", "alt": "Dashboard, profile, the rewards shop and an ordered reward", "width": 1500, "height": 1268 },
+      { "type": "image", "value": "assets/greener/feature-06-map.webp", "alt": "The map with one pin per place, and a selected pin showing its card", "width": 1500, "height": 2064 },
 
       { "type": "section", "value": "UI foundations" },
       { "type": "heading", "value": "A small system, because I had to apply it by hand." },
