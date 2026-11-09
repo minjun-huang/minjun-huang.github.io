@@ -88,7 +88,7 @@
     bar.setAttribute("role", "region");
     bar.setAttribute("aria-label", "Analytics choice");
     bar.innerHTML =
-      '<p class="consent__text">I use Google Analytics to see which projects people read, so I can improve this site. No ads.</p>' +
+      '<p class="consent__text">Analytics cookies, to see which projects get read. No ads.</p>' +
       '<div class="consent__actions">' +
       '<button type="button" class="consent__btn consent__btn--yes">Accept</button>' +
       '<button type="button" class="consent__btn">Decline</button>' +

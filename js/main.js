@@ -99,17 +99,39 @@ async function renderHome(list) {
   }
 }
 
-function sectionRule(index, title, year) {
+function sectionRule(index, title) {
   const rule = el("div", "section-rule");
-  rule.append(
-    el("span", "label", `${String(index).padStart(2, "0")} / ${title}`),
-    el("span", "label", year)
-  );
+  rule.append(el("span", "label", `${String(index).padStart(2, "0")} / ${title}`));
   return rule;
 }
 
+// Phone-width version of a feature board: the words are real text and each
+// screen is its own image, so nothing has to be read at a quarter of its size.
+function featureMobile(data) {
+  const wrap = el("div", "feature-m");
+  const head = el("div", "feature-m__head");
+  head.append(el("span", "feature-m__no", data.no), el("h3", "feature-m__title", data.title), el("p", "feature-m__text", data.text));
+  const shots = el("div", `feature-m__shots feature-m__shots--${data.shots.length > 2 ? "grid" : "row"}`);
+  data.shots.forEach((shot) => {
+    const fig = el("figure", "feature-m__shot");
+    const img = el("img");
+    img.src = shot.src;
+    img.alt = `${data.title}: ${shot.label} screen`;
+    img.width = shot.width;
+    img.height = shot.height;
+    img.loading = "lazy";
+    const cap = el("figcaption", "feature-m__cap");
+    cap.append(el("span", "label", shot.label));
+    if (shot.caption) cap.append(el("span", "feature-m__note", shot.caption));
+    fig.append(img, cap);
+    shots.append(fig);
+  });
+  wrap.append(head, shots);
+  return wrap;
+}
+
 function renderBlock(block, project, sectionIndex) {
-  if (block.type === "section") return sectionRule(sectionIndex, block.value, project.year);
+  if (block.type === "section") return sectionRule(sectionIndex, block.value);
   if (block.type === "heading") return el("h2", "h3 case-heading", block.value);
   if (block.type === "text") return el("p", "body", block.value);
   if (block.type === "caption") return el("p", "body case-caption", block.value);
@@ -121,7 +143,31 @@ function renderBlock(block, project, sectionIndex) {
     image.height = block.height;
   }
   image.loading = "lazy";
-  return image;
+  if (block.mobile) {
+    // Board on wide screens, real text and single screens on phones.
+    const both = el("div", "case-figure");
+    image.classList.add("case-figure__board");
+    both.append(image, featureMobile(block.mobile));
+    return both;
+  }
+  // Boards carry small text. On a phone, tapping opens the full image to zoom.
+  const link = el("a", "case-zoom");
+  link.href = block.value;
+  link.target = "_blank";
+  link.rel = "noopener";
+  link.append(image, el("span", "label case-zoom__hint", "Tap to enlarge"));
+  return link;
+}
+
+function nextProject(projects, project) {
+  if (projects.length < 2) return null;
+  const next = projects[(projects.indexOf(project) + 1) % projects.length];
+  const link = el("a", "next-project");
+  link.href = `case.html?slug=${encodeURIComponent(next.slug)}`;
+  const title = el("span", "h2 next-project__title", next.title);
+  title.append(el("span", "stop", "."));
+  link.append(el("span", "label", "Next project"), title, el("span", "body", next.summary));
+  return link;
 }
 
 function renderMissing(root, message) {
@@ -153,11 +199,13 @@ async function renderCase(root) {
       reveal(element);
     });
 
+    const next = nextProject(projects, project);
     root.replaceChildren(
       back,
       el("h1", "h2", project.title),
       el("p", "label case-meta", [...project.tags, project.year].join(" / ")),
-      blocks
+      blocks,
+      ...(next ? [next] : [])
     );
   } catch (error) {
     console.error(error);
