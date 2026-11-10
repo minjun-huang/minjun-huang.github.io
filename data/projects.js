@@ -47,7 +47,7 @@ window.PROJECTS = [
     year: 2025,
     summary: "Break reminders that only get louder when you ignore them.",
     tags: ["Mobile app", "UX research", "UI design"],
-    cover: "assets/sitaware/cover.webp?v=3",
+    cover: "assets/sitaware/cover.webp?v=4",
     blocks: [
       { type: "image", value: "assets/sitaware/board-01.webp?v=3", alt: "SitAware home screen showing 38 minutes of sitting, with the lock screen and rewards behind it", width: 1400, height: 1000 },
       { type: "caption", value: "SitAware, a solo MSc project at Kingston University. The screens shown are a later redesign of the prototype I tested." },
