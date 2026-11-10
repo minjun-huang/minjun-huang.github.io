@@ -5,7 +5,7 @@ window.PROJECTS = [
     "year": 2026,
     "summary": "Small park tasks, done in two to five minutes.",
     "tags": ["Mobile app", "UX research", "UI design"],
-    "cover": "assets/greener/cover.webp?v=2",
+    "cover": "assets/greener/cover.webp?v=3",
     "blocks": [
       { "type": "image", "value": "assets/greener/board-00-hero.webp?v=2", "alt": "Greener home screen with nearby park tasks, next to a map of Latchmere Rec", "width": 1500, "height": 2010 },
       { "type": "caption", "value": "Greener, a graduation project at Kingston University. Below is what I decided and why. The boards show the work itself." },
