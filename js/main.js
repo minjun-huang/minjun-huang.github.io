@@ -31,7 +31,7 @@ function initTown() {
   const town = document.querySelector("[data-town]");
   if (!town) return;
   const svg = town.querySelector(".town__svg");
-  town.querySelectorAll(".town__plot").forEach((plot) => {
+  town.querySelectorAll(".town__plot[href]").forEach((plot) => {
     plot.addEventListener("click", (event) => {
       if (reducedMotion || event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
       event.preventDefault();
@@ -62,8 +62,14 @@ function loadProjects() {
 }
 
 function projectRow(project) {
-  const row = el("a", "project-row");
-  row.href = `case.html?slug=${encodeURIComponent(project.slug)}`;
+  const wip = project.status === "wip";
+  // A project in progress has no case page yet: a plain block, not a link.
+  const row = el(wip ? "div" : "a", wip ? "project-row project-row--wip" : "project-row");
+  if (wip) {
+    row.tabIndex = 0;
+  } else {
+    row.href = `case.html?slug=${encodeURIComponent(project.slug)}`;
+  }
 
   const media = el("div", "project-row__media");
   const image = el("img");
@@ -71,6 +77,13 @@ function projectRow(project) {
   image.alt = "";
   image.loading = "lazy";
   media.append(image);
+  if (wip) {
+    const tape = el("div", "wip-tape");
+    tape.setAttribute("aria-hidden", "true");
+    const text = el("span", "wip-tape__text", "Under construction \u00b7 ".repeat(8));
+    tape.append(text);
+    media.append(tape);
+  }
 
   row.append(
     media,
@@ -159,7 +172,8 @@ function renderBlock(block, project, sectionIndex) {
   return link;
 }
 
-function nextProject(projects, project) {
+function nextProject(allProjects, project) {
+  const projects = allProjects.filter((item) => item.status !== "wip");
   if (projects.length < 2) return null;
   const next = projects[(projects.indexOf(project) + 1) % projects.length];
   const link = el("a", "next-project");
@@ -180,7 +194,7 @@ async function renderCase(root) {
   const slug = new URLSearchParams(window.location.search).get("slug");
   try {
     const projects = loadProjects();
-    const project = projects.find((item) => item.slug === slug);
+    const project = projects.find((item) => item.slug === slug && item.status !== "wip");
     if (!project) {
       renderMissing(root, "Project not found");
       return;
