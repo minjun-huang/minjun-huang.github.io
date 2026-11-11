@@ -86,6 +86,16 @@ window.PROJECTS = [
       { type: "text", value: "Whether Strong mode helps people or just stresses them, and whether streaks still matter once the first week is over." },
       { type: "image", value: "assets/sitaware/board-11.webp?v=4", alt: "Three things to test next: Strong mode, snooze versus start, and life after week one", width: 1400, height: 1016 }
     ]
+    },
+  {
+    slug: "everyman",
+    status: "wip",
+    title: "Everyman",
+    year: 2026,
+    summary: "Seat ordering only works while the trailers run. A concept redesign that tells guests before they arrive.",
+    tags: ["Mobile app", "UX research", "UI design", "In progress"],
+    cover: "assets/everyman/cover.webp?v=1",
+    blocks: []
   }
 ]
 ;
