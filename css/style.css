@@ -271,6 +271,60 @@ main {
   color: var(--ink-3);
 }
 
+/* A project still being built: no link, an accent tape on hover. */
+
+.project-row--wip {
+  cursor: default;
+  outline: none;
+}
+
+.project-row--wip .project-row__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.wip-tape {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 50%;
+  padding: 14px 0;
+  background: var(--accent);
+  color: #FFFFFF;
+  overflow: hidden;
+  white-space: nowrap;
+  transform: translateY(-50%) rotate(-6deg) scaleX(0);
+  transform-origin: left center;
+  transition: transform 360ms var(--ease-enter);
+}
+
+.wip-tape__text {
+  display: inline-block;
+  font: 500 15px/1 "Archivo", sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.project-row--wip:hover .wip-tape,
+.project-row--wip:focus-visible .wip-tape {
+  transform: translateY(-50%) rotate(-6deg) scaleX(1);
+}
+
+.project-row--wip:hover .project-row__media img,
+.project-row--wip:focus-visible .project-row__media img {
+  transform: none;
+  filter: grayscale(1);
+  opacity: .55;
+}
+
+.project-row--wip .project-row__media img {
+  transition: filter 300ms ease-out, opacity 300ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wip-tape { transition: none; }
+}
+
 /* Case study and About */
 
 .page-head {
@@ -717,6 +771,25 @@ main {
 .town__plot:focus-visible .town__label { fill: var(--accent); }
 .town__plot:hover .town__blurb,
 .town__plot:focus-visible .town__blurb { opacity: 1; }
+.town__plot--wip { cursor: default; }
+.town__wip { fill: var(--accent); opacity: 0; transition: opacity 200ms ease-out; }
+.town__wip-text { font: 500 11px/1 "Archivo", sans-serif; letter-spacing: .08em; text-transform: uppercase; fill: #FFFFFF; opacity: 0; transition: opacity 200ms ease-out; }
+.town__plot--wip:hover .town__wip,
+.town__plot--wip:focus-visible .town__wip,
+.town__plot--wip:hover .town__wip-text,
+.town__plot--wip:focus-visible .town__wip-text { opacity: 1; }
+.town__plot--wip .town__blurb { fill: var(--accent); }
+.town__sign-text { font: 600 9px/1 "Archivo", sans-serif; letter-spacing: .14em; fill: var(--ink); transition: fill 200ms ease-out; }
+.town__plot--wip:hover .town__sign-text,
+.town__plot--wip:focus-visible .town__sign-text { fill: var(--accent); }
+/* Marquee bulbs light up one after another while the cinema is hovered. */
+.town__plot--wip:hover .town__bulb,
+.town__plot--wip:focus-visible .town__bulb { animation: town-bulb 1.2s steps(1, end) infinite; animation-delay: calc(var(--i) * 200ms); }
+@keyframes town-bulb { 0% { fill: var(--accent); } 34% { fill: transparent; } }
+@media (prefers-reduced-motion: reduce) {
+  .town__plot--wip:hover .town__bulb,
+  .town__plot--wip:focus-visible .town__bulb { animation: none; fill: var(--accent); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .town__svg, .town__fill, .town__line, .town__dash, .town__leader, .town__dot, .town__ring, .town__label, .town__blurb { transition: none; }
