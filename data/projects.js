@@ -3,11 +3,11 @@ window.PROJECTS = [
     "slug": "greener",
     "title": "Greener",
     "year": 2026,
-    "summary": "Small park tasks, done in two to five minutes.",
+    "summary": "People skip park care for lack of time. So every task takes two to five minutes.",
     "tags": ["Mobile app", "UX research", "UI design"],
     "cover": "assets/greener/cover.webp?v=3",
     "blocks": [
-      {"type": "split", "variant": "hero", "label": "UX / UI case study · 2026", "title": "Small park tasks, done in two to five minutes.", "text": "Find a task nearby, follow the steps, and send a photo as proof.", "headFacts": [{"k": "Role", "v": "UX/UI designer, solo"}, {"k": "Context", "v": "MSc project, Kingston"}, {"k": "Tools", "v": "Figma, Miro"}], "image": {"src": "assets/greener/hero-phones.webp", "alt": "Greener home screen with nearby tasks, and a task detail screen with three numbered steps", "width": 1800, "height": 1520}},
+      {"type": "split", "variant": "hero", "label": "UX / UI case study · 2026", "title": "People skip park care for lack of time. So every task takes two to five minutes.", "text": "Find a task nearby, follow the steps, and send a photo as proof.", "headFacts": [{"k": "Role", "v": "UX/UI designer, solo"}, {"k": "Context", "v": "MSc project, Kingston"}, {"k": "Tools", "v": "Figma, Miro"}], "image": {"src": "assets/greener/hero-phones.webp", "alt": "Greener home screen with nearby tasks, and a task detail screen with three numbered steps", "width": 1800, "height": 1520}},
 
       { "type": "section", "value": "Overview" },
       { "type": "heading", "value": "Single player first. Everything else got cut." },
