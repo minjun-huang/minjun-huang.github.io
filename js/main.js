@@ -309,6 +309,11 @@ function renderBlock(block, project, sectionIndex) {
   }
   if (block.type === "heading") return el("h2", "h3 case-heading", block.value);
   if (block.type === "text") return el("p", "body", block.value);
+  if (block.type === "quote") {
+    const quote = el("blockquote", "case-quote");
+    quote.append(el("p", "case-quote__text", block.value), el("cite", "label case-quote__cite", block.cite));
+    return quote;
+  }
   if (block.type === "caption") return el("p", "body case-caption", block.value);
   const image = el("img", "case-image");
   image.src = block.value;
